@@ -1,5 +1,5 @@
 export const referencePages=[
- {src:'assets/reference-spread.png',title:'THINGS THAT STAY',format:'spread',alt:'첨부 원본 양면 매거진 — Things That Stay'},
- {src:'assets/reference-page.png',title:'MY LITTLE THINGS',format:'single',alt:'첨부 원본 단면 매거진 — My Little Things'}
+ {src:'assets/reference-spread.jpg',title:'OBJECT INDEX',format:'spread',alt:'첨부 원본 양면 매거진 — Object Index'},
+ {src:'assets/reference-page.jpg',title:'EVERYDAY ARCHIVE',format:'single',alt:'첨부 원본 단면 매거진 — Everyday Archive'}
 ];
-export function referencePage(index=0){const p=referencePages[index];return `<figure class="reference-magazine ${p.format}"><img src="${p.src}" alt="${p.alt}" width="${index?557:1536}" height="${index?745:1024}"></figure>`;}
+export function referencePage(index=0){const p=referencePages[index];return `<figure class="reference-magazine ${p.format}"><img src="${p.src}" alt="${p.alt}" width="${index?450:736}" height="${index?637:487}"></figure>`;}
