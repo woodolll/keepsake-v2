@@ -1,0 +1,80 @@
+[
+  {
+    "id": "orange",
+    "src": "assets/photos/orange.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Orange-Whole-%26-Split.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Orange-Whole-%26-Split.jpg",
+    "author": "Evan-Amos",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "modifications": "None. Original file; CSS display scaling only.",
+    "verifiedOn": "2026-10-26",
+    "mediaType": "image/jpeg",
+    "kind": "photograph"
+  },
+  {
+    "id": "flower",
+    "src": "assets/photos/flower.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Paeonia_(2005-0608-B)_isolated_on_white.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/5/54/Paeonia_%282005-0608-B%29_isolated_on_white.jpg",
+    "author": "Derek Ramsey / Chanticleer Garden",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "modifications": "None. Original file; CSS display scaling only.",
+    "verifiedOn": "2026-10-26",
+    "mediaType": "image/jpeg",
+    "kind": "photograph"
+  },
+  {
+    "id": "glasses",
+    "src": "assets/photos/glasses.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:2008-07-27_Sunglasses.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9d/2008-07-27_Sunglasses.jpg",
+    "author": "Ildar Sagdejev (Specious)",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "modifications": "None. Original file; CSS display scaling only.",
+    "verifiedOn": "2026-10-26",
+    "mediaType": "image/jpeg",
+    "kind": "photograph"
+  },
+  {
+    "id": "spoon",
+    "src": "assets/photos/spoon.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Spoon_(21619616885).jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/0/00/Spoon_%2821619616885%29.jpg",
+    "author": "Filipe Ramos",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+    "modifications": "None. Original file; CSS display scaling only.",
+    "verifiedOn": "2026-10-26",
+    "mediaType": "image/jpeg",
+    "kind": "photograph"
+  },
+  {
+    "id": "key",
+    "src": "assets/photos/key.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Photo_of_a_key.jpg",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/1/14/Photo_of_a_key.jpg",
+    "author": "Mikael Häggström",
+    "license": "CC0 1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "modifications": "None. Original file; CSS display scaling only.",
+    "verifiedOn": "2026-10-26",
+    "mediaType": "image/jpeg",
+    "kind": "photograph"
+  },
+  {
+    "id": "goose",
+    "src": "assets/photos/goose.png",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Goose_on_white_background_01.png",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/3/32/Goose_on_white_background_01.png",
+    "author": "Filo gèn'",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "modifications": "None. Original file; CSS display scaling only.",
+    "verifiedOn": "2026-10-26",
+    "mediaType": "image/png",
+    "kind": "photograph"
+  }
+]
