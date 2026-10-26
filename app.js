@@ -1,3 +1,4 @@
+import './question-sample.js?v=demo3';
 import {referencePage} from './reference-magazine.js?v=object-index-2';
 import {EDITIONS,composeIdentity,fixtureProfile} from './identity.js';
 import {renderSpread,renderCredits,attachImageErrors} from './editorial-renderer.js';
@@ -31,10 +32,4 @@ reader.addEventListener('click',e=>{const b=e.target.closest('[data-cover]');if(
 document.querySelector('#prev-page').addEventListener('click',()=>{if(page>0){page--;render();}});document.querySelector('#next-page').addEventListener('click',()=>{if(page<3){page++;render();}});
 document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>document.getElementById(b.dataset.close).close()));
 [reader,question].forEach(d=>{d.addEventListener('close',()=>opener?.focus());d.addEventListener('click',e=>{if(e.target===d){const r=d.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)d.close();}});});
-const answer=document.querySelector('#answer'),saveStatus=document.querySelector('#save-status'),storageKey='keepsake-v2:q01:v3.0';
-function updateCount(){document.querySelector('#char-count').textContent=answer.value.length+' / 60';}
-function saveAnswer(){updateCount();try{localStorage.setItem(storageKey,JSON.stringify({questionId:'Q01',version:'3.0',answer:answer.value.trim()||null,updatedAt:new Date().toISOString()}));saveStatus.textContent=answer.value.trim()?'이 브라우저에 저장했어요':'빈 답변으로 저장했어요';}catch{saveStatus.textContent='브라우저 저장이 제한되어 이 화면에서만 유지됩니다';}}
-document.querySelectorAll('[data-question]').forEach(b=>b.addEventListener('click',()=>{opener=b;try{const saved=JSON.parse(localStorage.getItem(storageKey));answer.value=typeof saved?.answer==='string'?saved.answer.slice(0,60):'';if(saved?.answer)saveStatus.textContent='이전에 적은 문장을 불러왔어요';}catch{saveStatus.textContent='브라우저 저장을 사용할 수 없습니다';}updateCount();question.showModal();}));
-answer.addEventListener('input',saveAnswer);document.querySelector('#save-answer').addEventListener('click',saveAnswer);document.querySelector('#clear-answer').addEventListener('click',()=>{answer.value='';try{localStorage.removeItem(storageKey);saveStatus.textContent='저장된 답변을 지웠어요';}catch{saveStatus.textContent='이 화면의 답변을 지웠어요';}updateCount();answer.focus();});
-
 document.querySelectorAll('.edition-card .mini-mag').forEach((el,i)=>{el.className='reference-card';el.innerHTML=referencePage(i===1?1:0);});
