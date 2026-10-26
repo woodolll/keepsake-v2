@@ -1,0 +1,352 @@
+[
+  {
+    "id": 1,
+    "name": "나라",
+    "tier": "PORTRAIT"
+  },
+  {
+    "id": 2,
+    "name": "해외 도시",
+    "tier": "PORTRAIT"
+  },
+  {
+    "id": 3,
+    "name": "계절",
+    "tier": "PORTRAIT"
+  },
+  {
+    "id": 4,
+    "name": "시간대",
+    "tier": "PORTRAIT"
+  },
+  {
+    "id": 5,
+    "name": "날씨",
+    "tier": "PORTRAIT"
+  },
+  {
+    "id": 6,
+    "name": "색",
+    "tier": "PORTRAIT"
+  },
+  {
+    "id": 7,
+    "name": "시대",
+    "tier": "PORTRAIT"
+  },
+  {
+    "id": 8,
+    "name": "영어 이름",
+    "tier": "PORTRAIT"
+  },
+  {
+    "id": 9,
+    "name": "별자리",
+    "tier": "PORTRAIT"
+  },
+  {
+    "id": 10,
+    "name": "행성",
+    "tier": "PORTRAIT"
+  },
+  {
+    "id": 11,
+    "name": "화학 원소",
+    "tier": "PORTRAIT"
+  },
+  {
+    "id": 12,
+    "name": "보석",
+    "tier": "PORTRAIT"
+  },
+  {
+    "id": 13,
+    "name": "한 단어",
+    "tier": "PORTRAIT"
+  },
+  {
+    "id": 14,
+    "name": "토템 이름",
+    "tier": "PORTRAIT"
+  },
+  {
+    "id": 15,
+    "name": "토템 아이템",
+    "tier": "PORTRAIT"
+  },
+  {
+    "id": 16,
+    "name": "문양 / 패턴",
+    "tier": "PORTRAIT"
+  },
+  {
+    "id": 17,
+    "name": "한국 노래",
+    "tier": "PORTRAIT"
+  },
+  {
+    "id": 18,
+    "name": "해외 노래",
+    "tier": "PORTRAIT"
+  },
+  {
+    "id": 19,
+    "name": "영화",
+    "tier": "PORTRAIT"
+  },
+  {
+    "id": 20,
+    "name": "영화 속 인물",
+    "tier": "PORTRAIT"
+  },
+  {
+    "id": 21,
+    "name": "영화 장르",
+    "tier": "PORTRAIT"
+  },
+  {
+    "id": 22,
+    "name": "책",
+    "tier": "PORTRAIT"
+  },
+  {
+    "id": 23,
+    "name": "소설 속 인물",
+    "tier": "PORTRAIT"
+  },
+  {
+    "id": 24,
+    "name": "위인 / 역사적 인물",
+    "tier": "PORTRAIT"
+  },
+  {
+    "id": 25,
+    "name": "화가 / 예술가",
+    "tier": "PORTRAIT"
+  },
+  {
+    "id": 26,
+    "name": "실제 가수",
+    "tier": "PORTRAIT"
+  },
+  {
+    "id": 27,
+    "name": "실제 배우",
+    "tier": "PORTRAIT"
+  },
+  {
+    "id": 28,
+    "name": "꽃",
+    "tier": "PORTRAIT"
+  },
+  {
+    "id": 29,
+    "name": "동물",
+    "tier": "PORTRAIT"
+  },
+  {
+    "id": 30,
+    "name": "바다",
+    "tier": "PORTRAIT"
+  },
+  {
+    "id": 31,
+    "name": "음식",
+    "tier": "PORTRAIT"
+  },
+  {
+    "id": 32,
+    "name": "음료",
+    "tier": "PORTRAIT"
+  },
+  {
+    "id": 33,
+    "name": "향",
+    "tier": "PORTRAIT"
+  },
+  {
+    "id": 34,
+    "name": "패션 브랜드",
+    "tier": "PORTRAIT"
+  },
+  {
+    "id": 35,
+    "name": "물건 / 오브제",
+    "tier": "PORTRAIT"
+  },
+  {
+    "id": 36,
+    "name": "공간",
+    "tier": "PORTRAIT"
+  },
+  {
+    "id": 37,
+    "name": "가상의 직업",
+    "tier": "PORTRAIT"
+  },
+  {
+    "id": 38,
+    "name": "초능력",
+    "tier": "PORTRAIT"
+  },
+  {
+    "id": 39,
+    "name": "사자성어",
+    "tier": "PORTRAIT"
+  },
+  {
+    "id": 40,
+    "name": "명언",
+    "tier": "PORTRAIT"
+  },
+  {
+    "id": 41,
+    "name": "한국 도시",
+    "tier": "WORLD"
+  },
+  {
+    "id": 42,
+    "name": "동네",
+    "tier": "WORLD"
+  },
+  {
+    "id": 43,
+    "name": "온도",
+    "tier": "WORLD"
+  },
+  {
+    "id": 44,
+    "name": "별",
+    "tier": "WORLD"
+  },
+  {
+    "id": 45,
+    "name": "자연의 원소",
+    "tier": "WORLD"
+  },
+  {
+    "id": 46,
+    "name": "광물",
+    "tier": "WORLD"
+  },
+  {
+    "id": 47,
+    "name": "타로카드",
+    "tier": "WORLD"
+  },
+  {
+    "id": 48,
+    "name": "상상의 생물",
+    "tier": "WORLD"
+  },
+  {
+    "id": 49,
+    "name": "악기",
+    "tier": "WORLD"
+  },
+  {
+    "id": 50,
+    "name": "또 다른 영화 속 인물",
+    "tier": "WORLD"
+  },
+  {
+    "id": 51,
+    "name": "영화감독",
+    "tier": "WORLD"
+  },
+  {
+    "id": 52,
+    "name": "소설",
+    "tier": "WORLD"
+  },
+  {
+    "id": 53,
+    "name": "드라마",
+    "tier": "WORLD"
+  },
+  {
+    "id": 54,
+    "name": "디즈니 캐릭터",
+    "tier": "WORLD"
+  },
+  {
+    "id": 55,
+    "name": "지브리 캐릭터",
+    "tier": "WORLD"
+  },
+  {
+    "id": 56,
+    "name": "게임",
+    "tier": "WORLD"
+  },
+  {
+    "id": 57,
+    "name": "해리포터 기숙사",
+    "tier": "WORLD"
+  },
+  {
+    "id": 58,
+    "name": "나무",
+    "tier": "WORLD"
+  },
+  {
+    "id": 59,
+    "name": "새",
+    "tier": "WORLD"
+  },
+  {
+    "id": 60,
+    "name": "산",
+    "tier": "WORLD"
+  },
+  {
+    "id": 61,
+    "name": "신발",
+    "tier": "WORLD"
+  },
+  {
+    "id": 62,
+    "name": "자동차 기종",
+    "tier": "WORLD"
+  },
+  {
+    "id": 63,
+    "name": "놀이기구",
+    "tier": "WORLD"
+  },
+  {
+    "id": 64,
+    "name": "가구",
+    "tier": "WORLD"
+  },
+  {
+    "id": 65,
+    "name": "건축물",
+    "tier": "WORLD"
+  },
+  {
+    "id": 66,
+    "name": "약점",
+    "tier": "WORLD"
+  },
+  {
+    "id": 67,
+    "name": "무기",
+    "tier": "WORLD"
+  },
+  {
+    "id": 68,
+    "name": "회복 아이템",
+    "tier": "WORLD"
+  },
+  {
+    "id": 69,
+    "name": "NPC가 나에게 할 법한 말",
+    "tier": "WORLD"
+  },
+  {
+    "id": 70,
+    "name": "인생 장르",
+    "tier": "WORLD"
+  }
+]
