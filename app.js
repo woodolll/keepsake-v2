@@ -1,4 +1,4 @@
-import {referencePage} from './reference-magazine.js';
+import {referencePage} from './reference-magazine.js?v=object-index-2';
 import {EDITIONS,composeIdentity,fixtureProfile} from './identity.js';
 import {renderSpread,renderCredits,attachImageErrors} from './editorial-renderer.js';
 import {PHOTO_SPREAD} from './spread-layout.js';

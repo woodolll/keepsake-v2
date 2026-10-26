@@ -1,4 +1,4 @@
-import {referencePage} from './reference-magazine.js';
+import {referencePage} from './reference-magazine.js?v=object-index-2';
 import {renderCredits} from './editorial-renderer.js';
 fetch('./assets/manifest.json').then(r=>r.json()).then(assets=>{const d=document.createElement('details');d.id='credits';d.className='photo-credits';d.innerHTML='<summary>랜딩 페이지 사진 출처 및 라이선스</summary>'+renderCredits(assets);document.querySelector('main').append(d);}).catch(()=>{});
 let selected=location.hash==='#single'?1:0;const mount=document.querySelector('#spread-mount');
