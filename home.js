@@ -12,8 +12,8 @@ const steps=[...document.querySelectorAll('.story-step')];let tops=[];
 const starField=(()=>{
  const vertices=Array.from({length:10},(_,i)=>{const a=-Math.PI/2+i*Math.PI/5,r=i%2?.46:1;return{x:Math.cos(a)*r,y:Math.sin(a)*r};});
  const field=[];
- for(let row=0;row<=50;row++)for(let col=0;col<=50;col++){
-  const x=col/25-1,y=row/25-1;let inside=false;
+ for(let row=0;row<=28;row++)for(let col=0;col<=28;col++){
+  const x=col/14-1,y=row/14-1;let inside=false;
   for(let i=0,j=9;i<10;j=i++){const a=vertices[i],b=vertices[j];if((a.y>y)!==(b.y>y)&&x<(b.x-a.x)*(y-a.y)/(b.y-a.y)+a.x)inside=!inside;}
   if(inside)field.push({x,y});
  }
@@ -54,7 +54,7 @@ function position(p,s){const left=p.i<40,side=left?-1:1,n=left?p.i:p.i-40,group=
  if(s===1)return {x:w/2+side*w*.16+(p.r-.5)*w*.16,y:h*.48+rand(p.i*31+p.j)*h*.34,size:2.5,alpha:.9};
  if(s===2)return {x:w*(left?.28:.72)+Math.cos(t*43)*Math.sqrt(p.r)*w*.13,y:h*.56+(group-1)*h*.14+Math.sin(t*43)*h*.06,size:2.8,alpha:.85};
  if(s===3||s===4)return {x:w/2+side*(w*(mobile?.1:.12)+Math.pow(p.r,3)*w*.24),y:h*.16+t*h*.75,size:scaled?2+p.r*7:2,alpha:.85};
- if(s===5){const count=left?400:300,index=n*10+p.j,point=starField[Math.floor(index/count*starField.length)],radius=Math.min(w*(left?.14:.20),h*(left?.20:.29));return{x:w*(left?.27:.73)+point.x*radius,y:h*.57+point.y*radius,size:scaled?2+p.r*5:(mobile?1.8:2.7),alpha:.9};}
+ if(s===5){const index=n*10+p.j,point=starField[index%starField.length],radius=Math.min(w*(left?.09:.12),h*(left?.12:.16));return{x:w*(left?.27:.73)+point.x*radius,y:h*.57+point.y*radius,size:radius*.047,alpha:index<starField.length?.95:0};}
  if(s===6){if(kept.has(p.c.id))return{x:w/2+(p.r-.5)*150,y:h*.46+rand(p.i+p.j)*140,size:3,alpha:.8};return{x:p.r*w,y:h*.83+rand(p.i*4+p.j)*h*.17,size:2.5,alpha:.8};}
  return {x:p.r*w,y:h*.85+rand(p.i+p.j)*h*.15,size:2,alpha:.25};
 }
