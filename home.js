@@ -4,7 +4,7 @@ const colors=['#f2ff55','#ff59c7','#65ffc4','#67ddff','#b78aff','#ffb45e'];
 const enabled={PORTRAIT:true,WORLD:true},kept=new Set();
 try{JSON.parse(localStorage.getItem('keepsake-v2:kept-categories')||'[]').forEach(id=>{if(categories.some(c=>c.id===id))kept.add(id);});}catch{}
 const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
-let w=innerWidth,h=innerHeight,scroll=scrollY,stage=0,progress=0,scaled=false,hover=null,pinned=false,frame=0,last=0,dragging=null;
+let w=innerWidth,h=innerHeight,scroll=scrollY,stage=0,progress=0,scaled=false,hover=null,pinned=false,frame=0,last=0,flowTime=0,dragging=null;
 const rand=n=>{const v=Math.sin(n*137.531+3.27)*43758.5453;return v-Math.floor(v);};
 const points=categories.flatMap((c,i)=>Array.from({length:10},(_,j)=>({c,i,j,x:w/2,y:h/2,size:2,alpha:1,r:rand(i*10+j),color:colors[(i<40?0:3)+(i%3)]})));
 const steps=[...document.querySelectorAll('.story-step')];let tops=[];
@@ -30,14 +30,14 @@ function resize(){w=innerWidth;h=innerHeight;const dpr=Math.min(devicePixelRatio
 resize();addEventListener('resize',resize);addEventListener('scroll',()=>scroll=scrollY,{passive:true});
 function position(p,s){const left=p.i<40,side=left?-1:1,n=left?p.i:p.i-40,group=p.i%3,t=(n*10+p.j)/(left?400:300),mobile=w<700;
  if(s===0){
-  const q=Math.floor((p.i*10+p.j)/2)/349,radius=Math.min(w*.43,h*.32),cy=h*.56;
-  const reveal=reduced?1:.12+Math.min(1,Math.max(0,scroll/(h*1.2)))*.88;
+  const q=Math.floor((p.i*10+p.j)/2)/349,radius=Math.min(w*.43,h*.28),cy=h*.67;
+  const head=(flowTime%14)/14*2.3;
   let x=w/2,y;
   if(q<.12)y=-20+(cy-radius+20)*q/.12;
   else if(q<=.84){const t=(q-.12)/.72*349,i=Math.min(348,Math.floor(t)),f=t-i,a=introSpiral[i],b=introSpiral[i+1];x+=(a.x+(b.x-a.x)*f)*radius;y=cy+(a.y+(b.y-a.y)*f)*radius;}
   else {const end=introSpiral[349],t=(q-.84)/.16;x+=end.x*radius*(1-t);y=cy+end.y*radius+(h+30-cy-end.y*radius)*t;}
-  // Scrolling writes one route; reverse scrolling unwrites it.
-  const ink=Math.max(0,Math.min(1,(reveal-q)*140));
+  // A timed light trail draws, holds, then clears the route every 14 seconds.
+  const ink=reduced?1:Math.max(0,Math.min(1,(head-q)*45,(q-head+1.3)*45));
   return{x,y,size:mobile?2:2.7,alpha:p.j%2===0?ink*.95:0};
  }
  if(s===1)return {x:w/2+side*w*.16+(p.r-.5)*w*.16,y:h*.48+rand(p.i*31+p.j)*h*.34,size:2.5,alpha:.9};
@@ -60,7 +60,7 @@ const starSprites=new Map(colors.map(color=>{
  return [color,sprite];
 }));
 function drawStar(x,y,r){const extent=r*128/24;ctx.drawImage(starSprites.get(ctx.fillStyle),x-extent/2,y-extent/2,extent,extent);}
-function draw(time){if(document.hidden){frame=requestAnimationFrame(draw);return;}const lerp=reduced?1:Math.min(.18,(time-last)/130||.1);last=time;updateStage();ctx.clearRect(0,0,w,h);
+function draw(time){if(document.hidden){frame=requestAnimationFrame(draw);return;}const lerp=reduced?1:Math.min(.18,(time-last)/130||.1);flowTime+=Math.min(.05,Math.max(0,(time-last)/1000));last=time;updateStage();ctx.clearRect(0,0,w,h);
  if(stage===3||stage===4){ctx.strokeStyle='#51617f';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(w/2,h*.14);ctx.lineTo(w/2,h*.92);ctx.stroke();ctx.font='10px Arial';ctx.fillStyle='#aab8d4';['67 QUESTIONS','30 AXES','5 LAYERS'].forEach((x,i)=>{const y=h*(.18+i*.32);ctx.fillStyle='#101d35';ctx.beginPath();ctx.arc(w/2,y,3,0,Math.PI*2);ctx.fill();ctx.stroke();ctx.fillStyle='#aab8d4';ctx.fillText(x,w/2+10,y+3);});}
  if(stage===1||stage===2){ctx.font='bold 13px Arial';ctx.textAlign='center';ctx.fillStyle='#e4e6f4';ctx.fillText('PORTRAIT',w*.28,h*.39);ctx.fillText('WORLD',w*.72,h*.39);ctx.textAlign='start';}
  for(const p of points){const a=position(p,stage),b=position(p,Math.min(7,stage+1));const mix=stage<6?Math.max(0,(progress-.68)/.32):0;const tx=a.x+(b.x-a.x)*mix,ty=a.y+(b.y-a.y)*mix;p.x+=(tx-p.x)*lerp;p.y+=(ty-p.y)*lerp;p.size+=(a.size-p.size)*lerp;p.alpha+=((enabled[p.c.tier]?a.alpha:.035)-p.alpha)*lerp;ctx.globalAlpha=p.alpha;ctx.fillStyle=p.color;const size=hover?.c.id===p.c.id?p.size+2:p.size;drawStar(p.x,p.y,Math.max(1.8,size));}
