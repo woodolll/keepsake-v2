@@ -1,6 +1,6 @@
 const canvas=document.querySelector('#world-canvas'),ctx=canvas.getContext('2d');
 const categories=await fetch('./categories.json').then(r=>{if(!r.ok)throw Error('categories unavailable');return r.json();});
-const colors=['#a6ddff','#ffc3df','#fff2a8','#a9efd5','#d4bfff'];
+const colors=['#ffe34d','#ff4b4b','#ffffff','#48c978','#b98255'];
 const enabled={PORTRAIT:true,WORLD:true},kept=new Set();
 try{JSON.parse(localStorage.getItem('keepsake-v2:kept-categories')||'[]').forEach(id=>{if(categories.some(c=>c.id===id))kept.add(id);});}catch{}
 const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
