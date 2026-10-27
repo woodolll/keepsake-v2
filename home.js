@@ -8,10 +8,28 @@ let w=innerWidth,h=innerHeight,scroll=scrollY,stage=0,progress=0,scaled=false,ho
 const rand=n=>{const v=Math.sin(n*137.531+3.27)*43758.5453;return v-Math.floor(v);};
 const points=categories.flatMap((c,i)=>Array.from({length:10},(_,j)=>({c,i,j,x:w/2,y:h/2,size:2,alpha:1,r:rand(i*10+j),color:colors[(i<40?0:3)+(i%3)]})));
 const steps=[...document.querySelectorAll('.story-step')];let tops=[];
+// One open spiral: follow the ten straight edges of a five-point star,
+// shrinking continuously on each turn. Sample by distance for even star spacing.
+const introSpiral=(()=>{
+ const path=[],lengths=[0];let total=0;
+ for(let k=0;k<=2400;k++){
+  const t=k/2400,edge=t*30,index=Math.floor(edge),f=edge-index;
+  const vertex=n=>{const a=-Math.PI/2+n*Math.PI/5,r=n%2?.46:1;return{x:Math.cos(a)*r,y:Math.sin(a)*r};};
+  const a=vertex(index),b=vertex(index+1),scale=1-t*.94;
+  const point={x:(a.x+(b.x-a.x)*f)*scale,y:(a.y+(b.y-a.y)*f)*scale};
+  if(k){total+=Math.hypot(point.x-path[k-1].x,point.y-path[k-1].y);lengths.push(total);}path.push(point);
+ }
+ let cursor=1;
+ return Array.from({length:350},(_,i)=>{
+  const distance=i/349*total;while(cursor<lengths.length-1&&lengths[cursor]<distance)cursor++;
+  const f=(distance-lengths[cursor-1])/(lengths[cursor]-lengths[cursor-1]),a=path[cursor-1],b=path[cursor];
+  return{x:a.x+(b.x-a.x)*f,y:a.y+(b.y-a.y)*f};
+ });
+})();
 function resize(){w=innerWidth;h=innerHeight;const dpr=Math.min(devicePixelRatio||1,2);canvas.width=w*dpr;canvas.height=h*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);tops=steps.map(s=>s.offsetTop);}
 resize();addEventListener('resize',resize);addEventListener('scroll',()=>scroll=scrollY,{passive:true});
 function position(p,s){const left=p.i<40,side=left?-1:1,n=left?p.i:p.i-40,group=p.i%3,t=(n*10+p.j)/(left?400:300),mobile=w<700;
- if(s===0){const q=n/(left?40:30);return {x:w/2+side*16,y:h*.37+q*h*.92,size:Math.max(.6,5*(1-q)),alpha:p.j===0?1-q*.8:0};}
+ if(s===0){const point=introSpiral[Math.floor((p.i*10+p.j)/2)],radius=Math.min(w*.45,h*.29);return{x:w/2+point.x*radius,y:h*.69+point.y*radius,size:mobile?2:2.7,alpha:p.j%2===0?.95:0};}
  if(s===1)return {x:w/2+side*w*.16+(p.r-.5)*w*.16,y:h*.48+rand(p.i*31+p.j)*h*.34,size:2.5,alpha:.9};
  if(s===2)return {x:w*(left?.28:.72)+Math.cos(t*43)*Math.sqrt(p.r)*w*.13,y:h*.56+(group-1)*h*.14+Math.sin(t*43)*h*.06,size:2.8,alpha:.85};
  if(s===3||s===4)return {x:w/2+side*(w*(mobile?.1:.12)+Math.pow(p.r,3)*w*.24),y:h*.16+t*h*.75,size:scaled?2+p.r*7:2,alpha:.85};
