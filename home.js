@@ -1,12 +1,12 @@
 const canvas=document.querySelector('#world-canvas'),ctx=canvas.getContext('2d');
 const categories=await fetch('./categories.json').then(r=>{if(!r.ok)throw Error('categories unavailable');return r.json();});
-const colors=['#f2ff55','#ff59c7','#65ffc4','#67ddff','#b78aff','#ffb45e'];
+const colors=['#a6ddff','#ffc3df','#fff2a8','#a9efd5','#d4bfff'];
 const enabled={PORTRAIT:true,WORLD:true},kept=new Set();
 try{JSON.parse(localStorage.getItem('keepsake-v2:kept-categories')||'[]').forEach(id=>{if(categories.some(c=>c.id===id))kept.add(id);});}catch{}
 const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
 let w=innerWidth,h=innerHeight,scroll=scrollY,stage=0,progress=0,scaled=false,hover=null,pinned=false,frame=0,last=0,flowTime=0,dragging=null;
 const rand=n=>{const v=Math.sin(n*137.531+3.27)*43758.5453;return v-Math.floor(v);};
-const points=categories.flatMap((c,i)=>Array.from({length:10},(_,j)=>({c,i,j,x:w/2,y:h/2,size:2,alpha:1,r:rand(i*10+j),color:colors[(i<40?0:3)+(i%3)]})));
+const points=categories.flatMap((c,i)=>Array.from({length:10},(_,j)=>({c,i,j,x:w/2,y:h/2,size:2,alpha:1,r:rand(i*10+j),color:colors[i%colors.length]})));
 const steps=[...document.querySelectorAll('.story-step')];let tops=[];
 // One open spiral: follow the ten straight edges of a five-point star,
 // shrinking continuously on each turn. Sample by distance for even star spacing.
@@ -38,7 +38,7 @@ function position(p,s){const left=p.i<40,side=left?-1:1,n=left?p.i:p.i-40,group=
   else {const end=introSpiral[349],t=(q-.84)/.16;x+=end.x*radius*(1-t);y=cy+end.y*radius+(h+30-cy-end.y*radius)*t;}
   // A timed light trail draws, holds, then clears the route every 14 seconds.
   const ink=reduced?1:Math.max(0,Math.min(1,(head-q)*45,(q-head+1.3)*45));
-  return{x,y,size:mobile?2:2.7,alpha:p.j%2===0?ink*.95:0};
+  return{x,y,size:mobile?3.2:4.3,alpha:(p.i*10+p.j)%4===0?ink*.95:0};
  }
  if(s===1)return {x:w/2+side*w*.16+(p.r-.5)*w*.16,y:h*.48+rand(p.i*31+p.j)*h*.34,size:2.5,alpha:.9};
  if(s===2)return {x:w*(left?.28:.72)+Math.cos(t*43)*Math.sqrt(p.r)*w*.13,y:h*.56+(group-1)*h*.14+Math.sin(t*43)*h*.06,size:2.8,alpha:.85};
