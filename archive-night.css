@@ -1,0 +1,29 @@
+#archive-menu {
+  width:min(620px,calc(100vw - 24px));
+  max-height:calc(100dvh - 24px);
+  padding:64px 56px 32px;
+  background:radial-gradient(ellipse at 75% 0%,#203353 0%,#101d35 44%,#091329 100%);
+  color:#f8f0df;scrollbar-width:thin;scrollbar-color:#536582 #101d35;
+  border:1px solid #a6ddff26;
+  border-radius:8px;
+  box-shadow:0 24px 100px #0009,inset 0 1px 0 #ffffff0b;
+}
+#archive-menu::backdrop{background:#040a18b8;backdrop-filter:blur(10px)}
+#archive-menu .archive-eyebrow{color:#a6ddff;font:10px/1.5 Arial,sans-serif;letter-spacing:2.8px;margin-bottom:23px}
+#archive-close{color:#f8f0df;scrollbar-width:thin;scrollbar-color:#536582 #101d35;right:22px;top:20px;width:36px;height:36px;border-radius:50%;border:1px solid #a6ddff33;background:#ffffff05;font:23px/1 Arial}
+#archive-close:hover{background:#a6ddff18}
+#archive-menu nav>a,#archive-menu nav>button{color:#f8f0df;scrollbar-width:thin;scrollbar-color:#536582 #101d35;font:400 clamp(29px,3.3vw,38px)/1.1 Georgia,serif;letter-spacing:-1px;padding:20px 0;border-bottom:1px solid #b6c9eb26;transition:color .2s,padding .2s,background .2s}
+#archive-menu nav>:nth-child(1){--star:#a6ddff}
+#archive-menu nav>:nth-child(2){--star:#ffc3df}
+#archive-menu nav>:nth-child(3){--star:#fff2a8}
+#archive-menu nav>:nth-child(4){--star:#a9efd5}
+#archive-menu nav>:nth-child(5){--star:#d4bfff}
+#archive-menu nav em{display:flex;align-items:center;gap:12px;color:var(--star);font:400 14px/1 Georgia,serif;letter-spacing:1px;white-space:nowrap}
+#archive-menu nav em::before{content:'★';font:17px/1 Georgia,serif;text-shadow:0 0 9px var(--star)}
+#archive-menu nav>a:hover,#archive-menu nav>button:hover{color:var(--star);padding-left:8px;background:linear-gradient(90deg,#ffffff06,transparent)}
+#archive-menu .menu-sample-note{color:#c4afc5;font:11px/1.5 Arial,sans-serif;margin-top:9px;letter-spacing:0}
+#archive-menu .archive-footer{color:#c1cce0;margin-top:30px;font:12px/1.8 Arial,sans-serif}
+#archive-menu .archive-footer small{color:#91a0bb;font-size:9px;margin-top:13px}
+#archive-menu #index-open{color:#a6ddff;margin-top:17px;text-decoration-color:#a6ddff66;text-underline-offset:5px}
+#archive-menu :focus-visible{outline:2px solid #a6ddff;outline-offset:5px}
+@media(max-width:600px){#archive-menu{padding:65px 27px 32px}#archive-menu nav>a,#archive-menu nav>button{font-size:clamp(25px,6.4vw,34px);padding:21px 0;gap:12px}#archive-menu nav em{font-size:12px;gap:8px}#archive-menu nav em::before{font-size:14px}}
