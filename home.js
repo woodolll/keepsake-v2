@@ -29,7 +29,17 @@ const introSpiral=(()=>{
 function resize(){w=innerWidth;h=innerHeight;const dpr=Math.min(devicePixelRatio||1,2);canvas.width=w*dpr;canvas.height=h*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);tops=steps.map(s=>s.offsetTop);}
 resize();addEventListener('resize',resize);addEventListener('scroll',()=>scroll=scrollY,{passive:true});
 function position(p,s){const left=p.i<40,side=left?-1:1,n=left?p.i:p.i-40,group=p.i%3,t=(n*10+p.j)/(left?400:300),mobile=w<700;
- if(s===0){const point=introSpiral[Math.floor((p.i*10+p.j)/2)],radius=Math.min(w*.45,h*.29);return{x:w/2+point.x*radius,y:h*.69+point.y*radius,size:mobile?2:2.7,alpha:p.j%2===0?.95:0};}
+ if(s===0){
+  const q=Math.floor((p.i*10+p.j)/2)/349,radius=Math.min(w*.43,h*.32),cy=h*.56;
+  const reveal=reduced?1:.12+Math.min(1,Math.max(0,scroll/(h*1.2)))*.88;
+  let x=w/2,y;
+  if(q<.12)y=-20+(cy-radius+20)*q/.12;
+  else if(q<=.84){const t=(q-.12)/.72*349,i=Math.min(348,Math.floor(t)),f=t-i,a=introSpiral[i],b=introSpiral[i+1];x+=(a.x+(b.x-a.x)*f)*radius;y=cy+(a.y+(b.y-a.y)*f)*radius;}
+  else {const end=introSpiral[349],t=(q-.84)/.16;x+=end.x*radius*(1-t);y=cy+end.y*radius+(h+30-cy-end.y*radius)*t;}
+  // Scrolling writes one route; reverse scrolling unwrites it.
+  const ink=Math.max(0,Math.min(1,(reveal-q)*140));
+  return{x,y,size:mobile?2:2.7,alpha:p.j%2===0?ink*.95:0};
+ }
  if(s===1)return {x:w/2+side*w*.16+(p.r-.5)*w*.16,y:h*.48+rand(p.i*31+p.j)*h*.34,size:2.5,alpha:.9};
  if(s===2)return {x:w*(left?.28:.72)+Math.cos(t*43)*Math.sqrt(p.r)*w*.13,y:h*.56+(group-1)*h*.14+Math.sin(t*43)*h*.06,size:2.8,alpha:.85};
  if(s===3||s===4)return {x:w/2+side*(w*(mobile?.1:.12)+Math.pow(p.r,3)*w*.24),y:h*.16+t*h*.75,size:scaled?2+p.r*7:2,alpha:.85};
@@ -61,7 +71,7 @@ const tip=document.querySelector('#particle-tip');
 addEventListener('scroll',()=>{tip.hidden=true;hover=null;pinned=false;},{passive:true});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){tip.hidden=true;hover=null;pinned=false;}});
 function showTip(p,x,y){hover=p;tip.hidden=false;tip.innerHTML=`<strong>${p.c.name}</strong>${p.c.tier} / CATEGORY ${String(p.c.id).padStart(2,'0')}<br>카테고리 탐색 · 실제 분석 결과 아님`;tip.style.left=Math.max(8,Math.min(w-245,x+16))+'px';tip.style.top=Math.max(75,Math.min(h-130,y+16))+'px';}
-function nearest(x,y){let best=null,dist=16;for(const p of points){if(!enabled[p.c.tier])continue;const d=Math.hypot(x-p.x,y-p.y);if(d<dist){best=p;dist=d;}}return best;}
+function nearest(x,y){let best=null,dist=16;for(const p of points){if(!enabled[p.c.tier]||p.alpha<.1)continue;const d=Math.hypot(x-p.x,y-p.y);if(d<dist){best=p;dist=d;}}return best;}
 canvas.addEventListener('pointermove',e=>{if(pinned)return;const p=nearest(e.clientX,e.clientY);canvas.style.cursor=p?'pointer':'default';if(p)showTip(p,e.clientX,e.clientY);else{tip.hidden=true;hover=null;}});
 canvas.addEventListener('pointerleave',()=>{if(!pinned){tip.hidden=true;hover=null;}});
 canvas.addEventListener('click',e=>{const p=nearest(e.clientX,e.clientY);pinned=Boolean(p);if(p)showTip(p,e.clientX,e.clientY);else{tip.hidden=true;hover=null;}});
