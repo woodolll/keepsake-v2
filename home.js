@@ -1,6 +1,6 @@
 const canvas=document.querySelector('#world-canvas'),ctx=canvas.getContext('2d');
 const categories=await fetch('./categories.json').then(r=>{if(!r.ok)throw Error('categories unavailable');return r.json();});
-const colors=['#c5b9f3','#f4b6d3','#b4e2ce','#f5d6a0','#b6d6f5','#e1bdf1'];
+const colors=['#f2ff55','#ff59c7','#65ffc4','#67ddff','#b78aff','#ffb45e'];
 const enabled={PORTRAIT:true,WORLD:true},kept=new Set();
 try{JSON.parse(localStorage.getItem('keepsake-v2:kept-categories')||'[]').forEach(id=>{if(categories.some(c=>c.id===id))kept.add(id);});}catch{}
 const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -20,7 +20,18 @@ function position(p,s){const left=p.i<40,side=left?-1:1,n=left?p.i:p.i-40,group=
  return {x:p.r*w,y:h*.85+rand(p.i+p.j)*h*.15,size:2,alpha:.25};
 }
 function updateStage(){let index=0;for(let i=1;i<tops.length;i++)if(scroll>=tops[i]-h*.2)index=i;stage=index;const length=(tops[index+1]??document.documentElement.scrollHeight)-tops[index];progress=Math.max(0,Math.min(1,(scroll-(tops[index]-h*.2))/length));document.querySelectorAll('.world-legend').forEach(l=>l.classList.toggle('active',stage>=2&&stage<7));document.querySelector('.world-progress').style.height=(scroll/Math.max(1,document.documentElement.scrollHeight-h)*100)+'%';}
-function drawStar(x,y,r){ctx.beginPath();for(let k=0;k<10;k++){const a=-Math.PI/2+k*Math.PI/5,rr=k%2?r*.43:r;const px=x+Math.cos(a)*rr,py=y+Math.sin(a)*rr;if(k===0)ctx.moveTo(px,py);else ctx.lineTo(px,py);}ctx.closePath();ctx.fill();}
+// Cache the halo and star once per color instead of blurring 700 paths every frame.
+const starSprites=new Map(colors.map(color=>{
+ const sprite=document.createElement('canvas');sprite.width=sprite.height=128;
+ const brush=sprite.getContext('2d'),halo=brush.createRadialGradient(64,64,6,64,64,60);
+ halo.addColorStop(0,color+'66');halo.addColorStop(.4,color+'24');halo.addColorStop(1,color+'00');
+ brush.fillStyle=halo;brush.fillRect(0,0,128,128);
+ brush.fillStyle=color;brush.shadowColor=color;brush.shadowBlur=10;brush.beginPath();
+ for(let k=0;k<10;k++){const a=-Math.PI/2+k*Math.PI/5,r=k%2?10.32:24,x=64+Math.cos(a)*r,y=64+Math.sin(a)*r;if(k===0)brush.moveTo(x,y);else brush.lineTo(x,y);}
+ brush.closePath();brush.fill();brush.shadowBlur=0;
+ return [color,sprite];
+}));
+function drawStar(x,y,r){const extent=r*128/24;ctx.drawImage(starSprites.get(ctx.fillStyle),x-extent/2,y-extent/2,extent,extent);}
 function draw(time){if(document.hidden){frame=requestAnimationFrame(draw);return;}const lerp=reduced?1:Math.min(.18,(time-last)/130||.1);last=time;updateStage();ctx.clearRect(0,0,w,h);
  if(stage===3||stage===4){ctx.strokeStyle='#51617f';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(w/2,h*.14);ctx.lineTo(w/2,h*.92);ctx.stroke();ctx.font='10px Arial';ctx.fillStyle='#aab8d4';['67 QUESTIONS','30 AXES','5 LAYERS'].forEach((x,i)=>{const y=h*(.18+i*.32);ctx.fillStyle='#101d35';ctx.beginPath();ctx.arc(w/2,y,3,0,Math.PI*2);ctx.fill();ctx.stroke();ctx.fillStyle='#aab8d4';ctx.fillText(x,w/2+10,y+3);});}
  if(stage===1||stage===2){ctx.font='bold 13px Arial';ctx.textAlign='center';ctx.fillStyle='#e4e6f4';ctx.fillText('PORTRAIT',w*.28,h*.39);ctx.fillText('WORLD',w*.72,h*.39);ctx.textAlign='start';}
