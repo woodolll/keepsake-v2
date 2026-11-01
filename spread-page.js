@@ -37,13 +37,22 @@ const collageFour=[
  {i:[64,57,23,38,-27],c:[67,42,8],align:'center'},
  {i:[85,70,20,22,19],c:[84,89,13],align:'left'}
 ];
+// An oversized pair of red high-tops anchors the final spread.
+const collageFive=slots.map(slot=>({...slot,i:[...slot.i],c:[...slot.c]}));
+collageFive[0]={i:[-4,-4,24,36,-20],c:[3,34,11],align:'left'};
+collageFive[1]={i:[17,0,15,22,16],c:[19,20,11],align:'left'};
+collageFive[2]={i:[29,-5,25,29,-19],c:[43,18,9],align:'left'};
+collageFive[3]={i:[-3,51,18,25,-14],c:[3,76,12],align:'left'};
+collageFive[4]={i:[6,17,53,57,-12],c:[28,74,22],align:'center'};
+collageFive[5]={i:[1,78,22,17,-16],c:[18,86,12],align:'left'};
+collageFive[6]={i:[35,82,18,14,17],c:[37,89,12],align:'left'};
 const mount=document.querySelector('#spread-mount'),viewport=document.querySelector('#spread-viewport');
 let selected=Math.max(0,Math.min(4,Number(location.hash.slice(1))-1||0));
 const chapters=document.querySelector('#chapters');
 titles.forEach((title,index)=>{const b=document.createElement('button');b.textContent=`0${index+1} / ${String(index*14+1).padStart(2,'0')}–${(index+1)*14}`;b.title=title;b.onclick=()=>render(index);chapters.append(b)});
-function render(index=selected){selected=index;history.replaceState(null,'',`#${index+1}`);mount.replaceChildren();const page=document.createElement('article');page.className='magazine-spread'+(index===3?' collage-four':'');page.setAttribute('aria-label',`${titles[index]} / ${index*14+1}–${(index+1)*14}`);
+function render(index=selected){selected=index;history.replaceState(null,'',`#${index+1}`);mount.replaceChildren();const page=document.createElement('article');page.className='magazine-spread'+(index===3?' collage-four':index===4?' collage-five':'');page.setAttribute('aria-label',`${titles[index]} / ${index*14+1}–${(index+1)*14}`);
  const running=document.createElement('div');running.className='running';running.innerHTML='<span>KEEPSAKE / THE PERSONAL EDIT</span><span>JUNE — WORLD EDITION</span>';page.append(running);
- fragments.slice(index*14,index*14+14).forEach((f,n)=>{const slot=(index===3?collageFour:slots)[n];const figure=document.createElement('figure');figure.className='editorial-object';const [x,y,w,h,r]=slot.i;figure.style.cssText=`left:${x}%;top:${y}%;width:${w}%;height:${h}%;--rotation:${r}deg`;const img=document.createElement('img');img.src=`assets/fragments/${String(f.id).padStart(2,'0')}.webp`;img.alt=f.value;img.decoding='async';figure.append(img);page.append(figure);
+ fragments.slice(index*14,index*14+14).forEach((f,n)=>{const slot=(index===3?collageFour:index===4?collageFive:slots)[n];const figure=document.createElement('figure');figure.className='editorial-object';const [x,y,w,h,r]=slot.i;figure.style.cssText=`left:${x}%;top:${y}%;width:${w}%;height:${h}%;--rotation:${r}deg`;const img=document.createElement('img');img.src=`assets/fragments/${String(f.id).padStart(2,'0')}.webp`;img.alt=f.value;img.decoding='async';figure.append(img);page.append(figure);
  const caption=document.createElement('button');caption.className=`editorial-caption ${slot.align}`;caption.style.cssText=`left:${slot.c[0]}%;top:${slot.c[1]}%;width:${slot.c[2]}%`;caption.setAttribute('aria-label',`${f.id}. ${f.value} 자세히 보기`);const number=document.createElement('b');number.textContent=`#${String(f.id).padStart(2,'0')} `;const title=document.createElement('strong');title.textContent=f.value;const body=document.createElement('span');body.textContent=f.reason;const category=document.createElement('small');category.textContent=`${categories[f.id-1].name} / JUNE`;caption.append(number,title,body,category);caption.onclick=()=>showDetail(f);page.append(caption);
  });const folio=document.createElement('div');folio.className='folio';const left=document.createElement('span');left.textContent=`${String(index*2+2).padStart(3,'0')}  KEEPSAKE / ${titles[index]}`;const right=document.createElement('span');right.textContent=`THE WORLD OF JUNE  ${String(index*2+3).padStart(3,'0')}`;folio.append(left,right);page.append(folio);mount.append(page);[...chapters.children].forEach((b,i)=>b.setAttribute('aria-pressed',String(i===selected)));document.querySelector('#progress').textContent=`${index+1} / 5`;document.querySelector('#previous').disabled=index===0;document.querySelector('#next').disabled=index===4;
 }

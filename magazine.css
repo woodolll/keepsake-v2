@@ -2,3 +2,5 @@
 
 /* Keep the lower captions inside the printed page and above its folio. */
 .collage-four .folio{bottom:.7%;padding-top:.5cqw}.collage-four .editorial-caption{font-size:.72cqw}.collage-four .editorial-caption.center{font-size:.82cqw}.collage-four .editorial-caption small{font-size:.52cqw}
+
+.collage-five .folio{bottom:.7%;padding-top:.5cqw}.collage-five .editorial-caption{font-size:.72cqw}.collage-five .editorial-caption.center{font-size:.82cqw}
