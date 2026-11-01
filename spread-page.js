@@ -19,6 +19,24 @@ const slots=[
  {i:[64,62,18,31,-19],c:[68,45,9],align:'center'},
  {i:[86,61,14,29,12],c:[86,90,11],align:'left'}
 ];
+// Second spread: Pippi's mismatched socks dominate the right page;
+// supporting fragments form an irregular collage at fourteen distinct scales.
+const collageTwo=[
+ {i:[-2,-3,24,36,-19],c:[3,34,12],align:'left'},
+ {i:[22,1,18,18,12],c:[31,19,13],align:'left'},
+ {i:[16,32,32,32,-11],c:[29,64,18],align:'center'},
+ {i:[1,49,13,22,18],c:[3,72,12],align:'left'},
+ {i:[29,78,19,14,-17],c:[32,88,15],align:'left'},
+ {i:[-1,79,22,15,9],c:[4,89,17],align:'left'},
+ {i:[15,12,16,20,-23],c:[17,33,12],align:'left'},
+ {i:[50,-1,17,24,-14],c:[51,24,14],align:'left'},
+ {i:[60,-5,43,65,14],c:[72,62,18],align:'center'},
+ {i:[49,39,15,23,-22],c:[51,63,12],align:'left'},
+ {i:[67,73,23,16,17],c:[70,89,15],align:'left'},
+ {i:[49,79,20,12,-9],c:[51,90,17],align:'left'},
+ {i:[86,73,14,13,-16],c:[87,87,11],align:'left'},
+ {i:[91,35,9,24,21],c:[91,60,8],align:'left'}
+];
 // Third spread: a large keepsake drawer and repaired ceramic cup are the
 // two anchors. Every supporting object has its own scale and caption space.
 const collageThree=[
@@ -68,9 +86,9 @@ const mount=document.querySelector('#spread-mount'),viewport=document.querySelec
 let selected=Math.max(0,Math.min(4,Number(location.hash.slice(1))-1||0));
 const chapters=document.querySelector('#chapters');
 titles.forEach((title,index)=>{const b=document.createElement('button');b.textContent=`0${index+1} / ${String(index*14+1).padStart(2,'0')}–${(index+1)*14}`;b.title=title;b.onclick=()=>render(index);chapters.append(b)});
-function render(index=selected){selected=index;history.replaceState(null,'',`#${index+1}`);mount.replaceChildren();const page=document.createElement('article');page.className='magazine-spread'+(index===2?' collage-three':index===3?' collage-four':index===4?' collage-five':'');page.setAttribute('aria-label',`${titles[index]} / ${index*14+1}–${(index+1)*14}`);
+function render(index=selected){selected=index;history.replaceState(null,'',`#${index+1}`);mount.replaceChildren();const page=document.createElement('article');page.className='magazine-spread'+(index===1?' collage-two':index===2?' collage-three':index===3?' collage-four':index===4?' collage-five':'');page.setAttribute('aria-label',`${titles[index]} / ${index*14+1}–${(index+1)*14}`);
  const running=document.createElement('div');running.className='running';running.innerHTML='<span>KEEPSAKE / THE PERSONAL EDIT</span><span>JUNE — WORLD EDITION</span>';page.append(running);
- fragments.slice(index*14,index*14+14).forEach((f,n)=>{const slot=(index===2?collageThree:index===3?collageFour:index===4?collageFive:slots)[n];const figure=document.createElement('figure');figure.className='editorial-object';const [x,y,w,h,r]=slot.i;figure.style.cssText=`left:${x}%;top:${y}%;width:${w}%;height:${h}%;--rotation:${r}deg`;const img=document.createElement('img');img.src=`assets/fragments/${String(f.id).padStart(2,'0')}.webp`;img.alt=f.value;img.decoding='async';figure.append(img);page.append(figure);
+ fragments.slice(index*14,index*14+14).forEach((f,n)=>{const slot=(index===1?collageTwo:index===2?collageThree:index===3?collageFour:index===4?collageFive:slots)[n];const figure=document.createElement('figure');figure.className='editorial-object';const [x,y,w,h,r]=slot.i;figure.style.cssText=`left:${x}%;top:${y}%;width:${w}%;height:${h}%;--rotation:${r}deg`;const img=document.createElement('img');img.src=`assets/fragments/${String(f.id).padStart(2,'0')}.webp`;img.alt=f.value;img.decoding='async';figure.append(img);page.append(figure);
  const caption=document.createElement('button');caption.className=`editorial-caption ${slot.align}`;caption.style.cssText=`left:${slot.c[0]}%;top:${slot.c[1]}%;width:${slot.c[2]}%`;caption.setAttribute('aria-label',`${f.id}. ${f.value} 자세히 보기`);const number=document.createElement('b');number.textContent=`#${String(f.id).padStart(2,'0')} `;const title=document.createElement('strong');title.textContent=f.value;const body=document.createElement('span');body.textContent=f.reason;const category=document.createElement('small');category.textContent=`${categories[f.id-1].name} / JUNE`;caption.append(number,title,body,category);caption.onclick=()=>showDetail(f);page.append(caption);
  });const folio=document.createElement('div');folio.className='folio';const left=document.createElement('span');left.textContent=`${String(index*2+2).padStart(3,'0')}  KEEPSAKE / ${titles[index]}`;const right=document.createElement('span');right.textContent=`THE WORLD OF JUNE  ${String(index*2+3).padStart(3,'0')}`;folio.append(left,right);page.append(folio);mount.append(page);[...chapters.children].forEach((b,i)=>b.setAttribute('aria-pressed',String(i===selected)));document.querySelector('#progress').textContent=`${index+1} / 5`;document.querySelector('#previous').disabled=index===0;document.querySelector('#next').disabled=index===4;
 }
