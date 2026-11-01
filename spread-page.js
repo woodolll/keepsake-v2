@@ -22,20 +22,20 @@ const slots=[
 // Second spread: Pippi's mismatched socks dominate the right page;
 // supporting fragments form an irregular collage at fourteen distinct scales.
 const collageTwo=[
- {i:[-2,-3,24,36,-19],c:[3,34,12],align:'left'},
- {i:[22,1,18,18,12],c:[31,19,13],align:'left'},
- {i:[16,32,32,32,-11],c:[29,64,18],align:'center'},
- {i:[1,49,13,22,18],c:[3,72,12],align:'left'},
- {i:[29,78,19,14,-17],c:[32,88,15],align:'left'},
- {i:[-1,79,22,15,9],c:[4,89,17],align:'left'},
- {i:[15,12,16,20,-23],c:[17,33,12],align:'left'},
- {i:[50,-1,17,24,-14],c:[51,24,14],align:'left'},
- {i:[60,-5,43,65,14],c:[72,62,18],align:'center'},
- {i:[49,39,15,23,-22],c:[51,63,12],align:'left'},
- {i:[67,73,23,16,17],c:[70,89,15],align:'left'},
- {i:[49,79,20,12,-9],c:[51,90,17],align:'left'},
- {i:[86,73,14,13,-16],c:[87,87,11],align:'left'},
- {i:[91,35,9,24,21],c:[91,60,8],align:'left'}
+ {i:[-4,-6,21,34,-26],c:[3,28,12],align:'left'},
+ {i:[33,-4,18,21,18],c:[36,18,12],align:'left'},
+ {i:[20,4,27,31,13],c:[35,36,13],align:'left'},
+ {i:[-2,54,16,23,-12],c:[3,77,12],align:'left'},
+ {i:[8,29,43,51,-17],c:[25,79,22],align:'center'},
+ {i:[2,86,19,10,11],c:[21,89,13],align:'left'},
+ {i:[8,7,17,20,-19],c:[16,23,13],align:'left'},
+ {i:[49,-4,21,27,19],c:[51,24,13],align:'left'},
+ {i:[59,0,39,64,-13],c:[76,64,20],align:'center'},
+ {i:[48,46,19,24,24],c:[50,71,13],align:'left'},
+ {i:[68,76,24,18,-14],c:[72,90,14],align:'left'},
+ {i:[48,82,17,13,-18],c:[51,91,17],align:'left'},
+ {i:[83,77,16,12,21],c:[87,89,11],align:'left'},
+ {i:[88,42,12,21,24],c:[87,57,11],align:'left'}
 ];
 // Third spread: a large keepsake drawer and repaired ceramic cup are the
 // two anchors. Every supporting object has its own scale and caption space.
