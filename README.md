@@ -13,8 +13,11 @@ Live website: https://woodolll.github.io/keepsake-v2/
 
 This buildless HTML/CSS/JavaScript prototype must be served over HTTP. The source is at the repository root. GitHub Pages publishes the main branch root for free.
 
-Full questionnaire progression, actual AI analysis, image generation APIs, payments and QR sharing are not connected. Text and objects inside the supplied magazine images are not independently editable.
+Full questionnaire progression, actual AI analysis, image generation APIs, payments and QR sharing are not connected. The supplied reference images remain visual references; the JUNE magazine uses individual fragment images and editable captions.
 
 ## Image credits
 
 Photo attribution and license links are in assets/manifest.json and spread.html. Reference magazine images are user-provided. No blanket license is granted for third-party imagery.
+
+## JUNE magazine
+spread.html uses all 70 existing fragment images in five editorial spreads. Open Preview > MY KEEPSAKES for the reader, zoom, fragment details and print/PDF output.
