@@ -19,13 +19,31 @@ const slots=[
  {i:[64,62,18,31,-19],c:[68,45,9],align:'center'},
  {i:[86,61,14,29,12],c:[86,90,11],align:'left'}
 ];
+// The fourth spread is a composed collage: two oversized anchors, with
+// smaller objects tucked around them. Captions retain clear white space.
+const collageFour=[
+ {i:[-3,-4,21,40,-16],c:[3,34,11],align:'left'},
+ {i:[15,-1,14,23,13],c:[16,21,10],align:'left'},
+ {i:[29,-5,24,29,-17],c:[41,13,8],align:'left'},
+ {i:[-2,48,20,28,-14],c:[4,76,12],align:'left'},
+ {i:[8,16,46,52,-9],c:[31,65,17],align:'center'},
+ {i:[12,71,22,24,8],c:[32,79,12],align:'left'},
+ {i:[39,73,14,21,-18],c:[42,89,12],align:'left'},
+ {i:[51,-7,25,29,13],c:[54,20,17],align:'center'},
+ {i:[70,-10,36,54,8],c:[86,47,11],align:'left'},
+ {i:[49,33,23,28,-18],c:[51,62,12],align:'left'},
+ {i:[70,32,19,31,-12],c:[77,66,13],align:'left'},
+ {i:[50,73,21,20,7],c:[54,89,16],align:'left'},
+ {i:[64,57,23,38,-27],c:[67,42,8],align:'center'},
+ {i:[85,70,20,22,19],c:[84,89,13],align:'left'}
+];
 const mount=document.querySelector('#spread-mount'),viewport=document.querySelector('#spread-viewport');
 let selected=Math.max(0,Math.min(4,Number(location.hash.slice(1))-1||0));
 const chapters=document.querySelector('#chapters');
 titles.forEach((title,index)=>{const b=document.createElement('button');b.textContent=`0${index+1} / ${String(index*14+1).padStart(2,'0')}–${(index+1)*14}`;b.title=title;b.onclick=()=>render(index);chapters.append(b)});
-function render(index=selected){selected=index;history.replaceState(null,'',`#${index+1}`);mount.replaceChildren();const page=document.createElement('article');page.className='magazine-spread';page.setAttribute('aria-label',`${titles[index]} / ${index*14+1}–${(index+1)*14}`);
+function render(index=selected){selected=index;history.replaceState(null,'',`#${index+1}`);mount.replaceChildren();const page=document.createElement('article');page.className='magazine-spread'+(index===3?' collage-four':'');page.setAttribute('aria-label',`${titles[index]} / ${index*14+1}–${(index+1)*14}`);
  const running=document.createElement('div');running.className='running';running.innerHTML='<span>KEEPSAKE / THE PERSONAL EDIT</span><span>JUNE — WORLD EDITION</span>';page.append(running);
- fragments.slice(index*14,index*14+14).forEach((f,n)=>{const slot=slots[n];const figure=document.createElement('figure');figure.className='editorial-object';const [x,y,w,h,r]=slot.i;figure.style.cssText=`left:${x}%;top:${y}%;width:${w}%;height:${h}%;--rotation:${r}deg`;const img=document.createElement('img');img.src=`assets/fragments/${String(f.id).padStart(2,'0')}.webp`;img.alt=f.value;img.decoding='async';figure.append(img);page.append(figure);
+ fragments.slice(index*14,index*14+14).forEach((f,n)=>{const slot=(index===3?collageFour:slots)[n];const figure=document.createElement('figure');figure.className='editorial-object';const [x,y,w,h,r]=slot.i;figure.style.cssText=`left:${x}%;top:${y}%;width:${w}%;height:${h}%;--rotation:${r}deg`;const img=document.createElement('img');img.src=`assets/fragments/${String(f.id).padStart(2,'0')}.webp`;img.alt=f.value;img.decoding='async';figure.append(img);page.append(figure);
  const caption=document.createElement('button');caption.className=`editorial-caption ${slot.align}`;caption.style.cssText=`left:${slot.c[0]}%;top:${slot.c[1]}%;width:${slot.c[2]}%`;caption.setAttribute('aria-label',`${f.id}. ${f.value} 자세히 보기`);const number=document.createElement('b');number.textContent=`#${String(f.id).padStart(2,'0')} `;const title=document.createElement('strong');title.textContent=f.value;const body=document.createElement('span');body.textContent=f.reason;const category=document.createElement('small');category.textContent=`${categories[f.id-1].name} / JUNE`;caption.append(number,title,body,category);caption.onclick=()=>showDetail(f);page.append(caption);
  });const folio=document.createElement('div');folio.className='folio';const left=document.createElement('span');left.textContent=`${String(index*2+2).padStart(3,'0')}  KEEPSAKE / ${titles[index]}`;const right=document.createElement('span');right.textContent=`THE WORLD OF JUNE  ${String(index*2+3).padStart(3,'0')}`;folio.append(left,right);page.append(folio);mount.append(page);[...chapters.children].forEach((b,i)=>b.setAttribute('aria-pressed',String(i===selected)));document.querySelector('#progress').textContent=`${index+1} / 5`;document.querySelector('#previous').disabled=index===0;document.querySelector('#next').disabled=index===4;
 }
