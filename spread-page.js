@@ -40,13 +40,13 @@ const collageTwo=[
 // Third spread: a large keepsake drawer and repaired ceramic cup are the
 // two anchors. Every supporting object has its own scale and caption space.
 const collageThree=[
- {i:[-4,-5,28,46,-13],c:[3,42,12],align:'left'},
+ {i:[-1,-2,23,37,-13],c:[3,35,12],align:'left'},
  {i:[22,-3,27,23,11],c:[33,20,13],align:'left'},
- {i:[31,77,15,13,11],c:[30,89,17],align:'left'},
+ {i:[26,77,23,18,11],c:[15,86,12],align:'left'},
  {i:[1,48,12,20,15],c:[3,69,11],align:'left'},
- {i:[15,33,35,39,-18],c:[25,71,21],align:'center'},
+ {i:[15,30,35,39,-18],c:[24,69,23],align:'center'},
  {i:[0,80,19,12,8],c:[3,90,18],align:'left'},
- {i:[18,8,31,29,7],c:[29,36,18],align:'left'},
+ {i:[22,7,25,24,7],c:[29,31,18],align:'left'},
  {i:[50,0,20,22,-16],c:[52,23,16],align:'center'},
  {i:[68,-3,36,44,10],c:[82,40,15],align:'left'},
  {i:[79,48,20,17,-21],c:[86,65,11],align:'left'},
