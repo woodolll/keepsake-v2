@@ -34,7 +34,7 @@ const collageFour=[
  {i:[49,33,23,28,-18],c:[51,62,12],align:'left'},
  {i:[70,32,19,31,-12],c:[77,66,13],align:'left'},
  {i:[50,73,21,20,7],c:[54,89,16],align:'left'},
- {i:[64,57,23,38,-27],c:[67,42,8],align:'center'},
+ {i:[68,58,17,29,-20],c:[72,88,11],align:'left'},
  {i:[85,70,20,22,19],c:[84,89,13],align:'left'}
 ];
 // An oversized pair of red high-tops anchors the final spread.
