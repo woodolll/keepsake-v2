@@ -13,7 +13,7 @@ if(existing){
   document.body.append(menu);
   button.onclick=()=>{if(!menu.open)menu.showModal();button.setAttribute('aria-expanded','true')};
   menu.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>menu.close());
-  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menu.close()));
+  menu.querySelectorAll('a').forEach(a=>{const target=new URL(a.href);if(target.pathname===location.pathname)a.href=location.pathname+location.search+target.hash;a.addEventListener('click',()=>menu.close())});
   menu.addEventListener('close',()=>{button.setAttribute('aria-expanded','false');button.focus()});
   menu.addEventListener('click',e=>{if(e.target!==menu)return;const r=menu.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)menu.close()});
   // Same-page menu links must select the corresponding preview panel as well.
